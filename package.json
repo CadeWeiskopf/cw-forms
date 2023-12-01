@@ -1,0 +1,24 @@
+{
+  "name": "cw-forms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/async-lock": "^1.4.2",
+    "@types/uuid": "^9.0.7",
+    "react": "^18.2.0",
+    "uuid": "^9.0.1"
+  },
+  "dependencies": {
+    "async-lock": "^1.4.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
+}
