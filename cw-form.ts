@@ -1,4 +1,5 @@
 import AsyncLock from "async-lock";
+import { FormInput } from "./cw-form-input";
 
 const asyncLock = new AsyncLock();
 
@@ -42,7 +43,9 @@ export class Form {
   }
 
   ref = (id: string, domRef: HTMLInputElement, refName: string): void => {
-    this.dataRefs.push({ id, ref: domRef, refName });
+    asyncLock.acquire(this.formDataRefsLock, () => {
+      this.dataRefs.push({ id, ref: domRef, refName });
+    });
   };
 
   data = <T>(typeGuard: (value: unknown) => value is T): T => {
@@ -76,3 +79,5 @@ export class Form {
     return obj as T;
   };
 }
+
+export { FormInput };

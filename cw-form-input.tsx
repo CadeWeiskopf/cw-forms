@@ -1,4 +1,4 @@
-import { React, useRef, useEffect } from "react";
+import React, { useEffect, createRef } from "react";
 import { Form } from "./cw-form";
 import { v4 as uuidV4 } from "uuid";
 
@@ -15,7 +15,7 @@ export const FormInput: React.FC<FormInputProps> = ({
   component,
 }) => {
   const id = uuidV4();
-  const inputWrapper = useRef<HTMLDivElement>(null);
+  const inputWrapper = createRef<HTMLDivElement>();
   useEffect(() => {
     const selectors = `input,select,textarea`;
     const inputs = inputWrapper.current?.querySelectorAll(selectors);
@@ -30,7 +30,7 @@ export const FormInput: React.FC<FormInputProps> = ({
     }
     const domElement = inputs[0] as HTMLInputElement;
     form.ref(id, domElement, name);
-  });
+  }, [form, id, inputWrapper, name]);
   return (
     <div
       className={className}
