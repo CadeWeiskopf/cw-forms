@@ -16,6 +16,7 @@ export const FormInput: React.FC<FormInputProps> = ({
 }) => {
   const id = uuidV4();
   const inputWrapper = createRef<HTMLDivElement>();
+
   useEffect(() => {
     const selectors = `input,select,textarea`;
     const inputs = inputWrapper.current?.querySelectorAll(selectors);
@@ -26,10 +27,21 @@ export const FormInput: React.FC<FormInputProps> = ({
       throw Error("no inputs");
     }
     if (inputs.length > 1) {
-      throw Error("more than one inputs for one FormInput");
+      let isAllRadio: boolean = true;
+      inputs.forEach((input) => {
+        if (!isAllRadio) {
+          return;
+        }
+        isAllRadio = input.getAttribute("type") === "radio";
+        console.log(input.getAttribute("type"));
+      });
+      if (!isAllRadio) {
+        throw Error("more than one inputs for one FormInput");
+      }
     }
-    const domElement = inputs[0] as HTMLInputElement;
-    form.ref(id, domElement, name);
+    inputs.forEach((inputElement) => {
+      form.ref(id, inputElement as HTMLInputElement, name);
+    });
   }, [form, id, inputWrapper, name]);
   return (
     <div
