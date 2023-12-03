@@ -33,7 +33,6 @@ export const FormInput: React.FC<FormInputProps> = ({
           return;
         }
         isAllRadio = input.getAttribute("type") === "radio";
-        console.log(input.getAttribute("type"));
       });
       if (!isAllRadio) {
         throw Error("more than one inputs for one FormInput");
